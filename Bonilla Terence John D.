@@ -1,0 +1,26 @@
+public class Main {
+  public static void main(String[] args) {
+ 
+    //store information
+    System.out.println("Welcome to Bonilla's Store");
+    System.out.println("106 t. Alonzo");
+    System.out.println("Baguio City, philippines,2600");
+    
+    //Itemized list 
+    System.out.println("Item\t\tQuantity\tPrice");
+    System.out.println("----------------------------------------");
+    System.out.println("Apples\t\t3t\t$2.97");
+    System.out.println("Bananas\t\t2t\t$.18");
+    System.out.println("Oranges\t\t5t\t$3.95");
+    System.out.println("\n----------------------------------------");
+    
+    //Total Amount
+    System.out.println("Total Amount Deu:t\t$8.10\n");
+
+    
+     
+    // Thank you message
+    System.out.println("Thank you for shopping with us!\nHave a great day!");
+    
+  }
+}
