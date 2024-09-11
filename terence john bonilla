@@ -1,0 +1,9 @@
+public class Main {
+  public static void main(String[] args) {
+    //Define the name and age 
+    String name = "Terence john Bonilla";
+    int age = 20;
+    System.out.println("hello I'm "+name + "and I'm "+ age +  "years old");
+   
+  }
+}
