@@ -1,0 +1,23 @@
+public class Main {
+  public static void main(String[] args) {
+ 
+        // Predefined values for length and width
+        double length = 10.0;  // length in meters
+        double width = 5.0;    // width in meters
+
+        // Calculating area and perimeter
+        double area = length * width;
+        double perimeter = 2 * (length + width);
+
+        // Displaying the results
+        System.out.println("Length of the garden: " + length + " meters");
+        System.out.println("Width of the garden: " + width + " meters");
+        System.out.println("Area of the garden: " + area + " square meters");
+        System.out.println("Perimeter of the garden: " + perimeter + " meters");
+
+
+  
+  
+  }
+ 
+}
