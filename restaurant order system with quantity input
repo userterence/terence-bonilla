@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class SimpleRestaurantOrder {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Display the menu
+        System.out.println("MENU");
+        System.out.println("1. Burger - PHP 100");
+        System.out.println("2. Fries - PHP 50");
+        System.out.println("3. Soda - PHP 30");
+        System.out.println("4. Ice Cream - PHP 45");
+
+        // Get user input for menu selection and quantity
+        System.out.print("Enter menu number: ");
+        int choice = scanner.nextInt();
+        System.out.print("Enter quantity: ");
+        int quantity = scanner.nextInt();
+
+        // Prices array
+        int[] prices = {100, 50, 30, 45};
+
+        // Calculate and display total if valid choice
+        if (choice >= 1 && choice <= 4) {
+            int total = prices[choice - 1] * quantity;
+            System.out.println("Total: PHP " + total);
+        } else {
+            System.out.println("Invalid selection.");
+        }
+
+        scanner.close();
+    }
+}
