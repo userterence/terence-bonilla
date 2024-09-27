@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class DecimalToBinaryConverter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        
+        while (true) {
+            System.out.print("Enter a decimal number (or type 'STOP' to exit): ");
+            input = scanner.nextLine();
+           
+           // Exit the loop if the user types "STOP"
+            if (input.equalsIgnoreCase("STOP")) {
+                break;  
+            }
+
+             int decimal = Integer.parseInt(input);  // Convert input to integer
+            System.out.println(Integer.toBinaryString(decimal));  // Convert to binary and print
+        }
+
+        scanner.close();//Close the scanner.
+    }
+}
