@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class ClassroomAttendanceSystem{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Step 1: Input the total number of students in the class
+        System.out.print("Enter the total number of students: ");
+        int totalStudents = scanner.nextInt();
+
+        // Step 2: Initialize counters for present and absent students
+        int presentCount = 0;
+        int absentCount = 0;
+
+        // Step 3: Use a loop to ask whether each student is present or absent
+        for (int i = 1; i <= totalStudents; i++) {
+            while (true) {
+                System.out.print("Is student " + i + " present? (Y/N): ");
+                char status = scanner.next().trim().toUpperCase().charAt(0);
+
+                // Check input validity and update counts
+                if (status == 'Y') {
+                    presentCount++;
+                    break; // Exit inner loop to proceed to the next student
+                } else if (status == 'N') {
+                    absentCount++;
+                    break; // Exit inner loop to proceed to the next student
+                } else {
+                    System.out.println("Invalid input. Please enter 'Y' for present or 'N' for absent.");
+                }
+            }
+        }
+
+        // Step 4: Display the final counts at the end
+        System.out.println("\nAttendance Summary:");
+        System.out.println("Total present: " + presentCount);
+        System.out.println("Total absent: " + absentCount);
+
+        scanner.close();
+    }
+}
