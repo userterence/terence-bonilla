@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class SumOfEvenDigits {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt for a positive integer input
+        System.out.print("Enter a positive integer: ");
+        int number = scanner.nextInt();
+
+        // Check if the number has more than two digits
+        if (number > 99) {
+            int sum = 0;
+
+            // Process each digit to find even digits and calculate their sum
+            while (number > 0) {
+                int digit = number % 10; // Get the last digit
+                if (digit % 2 == 0) { // Check if the digit is even
+                    sum += digit; // Add to sum if it's even
+                }
+                number /= 10; // Remove the last digit
+            }
+
+            // Output the sum of even digits
+            System.out.println("Sum of even digits: " + sum);
+        } else {
+            // Output message for two digits or less
+            System.out.println("The number has two digits or less, no sum calculated.");
+        }
+
+        scanner.close(); // Close the scanner
+    }
+}
