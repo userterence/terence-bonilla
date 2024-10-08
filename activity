@@ -1,0 +1,36 @@
+public class App {
+    public static void main(String[] args) throws Exception {
+        
+        // Initialize the unsorted array
+        int[] KoPo = {4, 3, 5, 1, 2};
+        int[] SortedArray = new int[KoPo.length];
+
+        // Printing unsorted array
+        System.out.print("Unsorted Array: ");
+        for (int i : KoPo) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        
+        // Sorting the array using bubble sort
+        for (int i = 0; i < KoPo.length - 1; i++) {
+            for (int j = 0; j < KoPo.length - i - 1; j++) {
+                if (KoPo[j] > KoPo[j + 1]) {
+                    // Swap KoPo[j] and KoPo[j+1]
+                    int temp = KoPo[j];
+                    KoPo[j] = KoPo[j + 1];
+                    KoPo[j + 1] = temp;
+                }
+            }
+        }
+
+        // Copying the sorted array to SortedArray
+        System.arraycopy(KoPo, 0, SortedArray, 0, KoPo.length);
+
+        // Printing sorted array
+        System.out.print("Sorted Array: ");
+        for (int i : SortedArray) {
+            System.out.print(i + " ");
+        }
+    }
+}
