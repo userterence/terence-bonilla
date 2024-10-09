@@ -1,0 +1,44 @@
+public class BitwiseCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input for operands and operator
+        System.out.print("Enter Operand 1 (decimal): ");
+        int operand1 = scanner.nextInt();
+
+        System.out.print("Enter Operator (&, |, ^, <<, >>): ");
+        String operator = scanner.next();
+
+        System.out.print("Enter Operand 2 (decimal): ");
+        int operand2 = scanner.nextInt();
+
+        // Perform the operation
+        int result = performOperation(operand1, operator, operand2);
+
+        // Output result or error
+        if (result != Integer.MIN_VALUE) {
+            System.out.println("Result: " + result);
+        } else {
+            System.out.println("Unidentified Operation");
+        }
+
+        scanner.close();
+    }
+
+
+public static int performOperation(int operand1, String operator, int operand2) {
+    switch (operator) {
+        case "&":
+            return operand1 & operand2;  // Bitwise AND
+        case "|":
+            return operand1 | operand2;  // Bitwise OR
+        case "^":
+            return operand1 ^ operand2;  // Bitwise XOR
+        case "<<":
+            return operand1 << operand2; // Left shift
+        case ">>":
+            return operand1 >> operand2; // Right shift
+        default:
+            return Integer.MIN_VALUE;    // Error value for unidentified operation
+    }
+}
