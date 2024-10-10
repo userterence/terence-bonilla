@@ -1,0 +1,59 @@
+public class Car {
+    // Attributes
+    private String make;
+    private String model;
+    private int year;
+    private String color;
+    private int mileage;
+
+    // Constructor
+    public Car(String make, String model, int year, String color, int mileage) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.color = color;
+        this.mileage = mileage;
+    }
+
+    // Methods
+    public void start() {
+        System.out.println("The car is starting.");
+    }
+
+    public void stop() {
+        System.out.println("The car is stopping.");
+    }
+
+    public void accelerate() {
+        System.out.println("The car is accelerating.");
+    }
+
+    public void brake() {
+        System.out.println("The car is braking.");
+    }
+
+    public void honk() {
+        System.out.println("The car is honking.");
+    }
+
+    // Getters for the attributes (optional)
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public int getMileage() {
+        return mileage;
+    }
+}
