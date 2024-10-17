@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class BitwiseCalculator {
+
+    // Method to convert input string based on the base
+    public static int convertToDecimal(String operand, int base) throws NumberFormatException {
+        return Integer.parseInt(operand, base);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input: Operand 1
+        System.out.print("Enter Operand 1: ");
+        String operand1 = scanner.next();
+
+        // Input: Operand 2
+        System.out.print("Enter Operand 2: ");
+        String operand2 = scanner.next();
+
+        // Input: Operator (+, -, *, /)
+        System.out.print("Enter Operator (+, -, *, /): ");
+        String operator = scanner.next();
+
+        // Input: Base (0-16)
+        System.out.print("Enter Base (0-16): ");
+        int base = scanner.nextInt();
+
+        // Check if base is valid
+        if (base < 2 || base > 16) {
+            System.out.println("Invalid Base! Please enter a base between 2 and 16.");
+            return;
+        }
+
+        try {
+            // Convert operands to decimal
+            int num1 = convertToDecimal(operand1, base);
+            int num2 = convertToDecimal(operand2, base);
+            int result = 0;
+
+            // Perform operation based on the operator input
+            switch (operator) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 == 0) {
+                        System.out.println("Error: Division by Zero!");
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+                default:
+                    System.out.println("Unidentified Operation");
+                    return;
+            }
+
+            // Print the result
+            System.out.println("Result in decimal: " + result);
+            System.out.println("Result in base " + base + ": " + Integer.toString(result, base).toUpperCase());
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid operand format for base " + base + ".");
+        }
+    }
+}
