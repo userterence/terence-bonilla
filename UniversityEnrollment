@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class UniversityEnrollment {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Step 1: Create a one-dimensional array to store the names of 5 students
+        String[] students = new String[5];
+
+        // Input names of 5 students
+        for (int i = 0; i < students.length; i++) {
+            System.out.print("Enter the name of student " + (i + 1) + ": ");
+            students[i] = scanner.nextLine();
+        }
+
+        // Step 2: Create a two-dimensional array to store the grades of each student across 3 subjects
+        double[][] grades = new double[5][3];  // 5 students, 3 subjects
+
+        // Input grades for each student in 3 subjects
+        for (int i = 0; i < students.length; i++) {
+            System.out.println("Enter grades for " + students[i] + ":");
+            for (int j = 0; j < grades[i].length; j++) {
+                System.out.print("  Enter grade for subject " + (j + 1) + ": ");
+                grades[i][j] = scanner.nextDouble();
+            }
+        }
+
+        // Step 3: Calculate the average grade for each student
+        double[] averages = new double[5];
+
+        for (int i = 0; i < students.length; i++) {
+            double total = 0;
+            for (int j = 0; j < grades[i].length; j++) {
+                total += grades[i][j];
+            }
+            averages[i] = total / grades[i].length;
+        }
+
+        // Step 4: Display each student's name along with their average grade
+        System.out.println("\nStudent Name and Average Grade:");
+        for (int i = 0; i < students.length; i++) {
+            System.out.printf("%s: %.2f\n", students[i], averages[i]);
+        }
+
+        scanner.close();
+    }
+}
