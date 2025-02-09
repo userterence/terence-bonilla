@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class ArrayAddressCalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input number of dimensions
+        System.out.print("Enter the number of dimensions: ");
+        int dimensions = scanner.nextInt();
+
+        // Input base address (Alpha)
+        System.out.print("Enter the base address (Alpha): ");
+        int baseAddress = scanner.nextInt();
+
+        // Input element size
+        System.out.print("Enter the element size (in bytes): ");
+        int elementSize = scanner.nextInt();
+
+        // Input upper bounds for each dimension
+        int[] upperBounds = new int[dimensions];
+        System.out.println("Enter the upper bounds for each dimension:");
+        for (int i = 0; i < dimensions; i++) {
+            System.out.print("Upper bound for dimension " + (i + 1) + ": ");
+            upperBounds[i] = scanner.nextInt();
+        }
+
+        // Input target element indices
+        int[] targetIndices = new int[dimensions];
+        System.out.println("Enter the indices of the target element:");
+        for (int i = 0; i < dimensions; i++) {
+            System.out.print("Index for dimension " + (i + 1) + ": ");
+            targetIndices[i] = scanner.nextInt();
+        }
+
+        // Calculate the memory address of the target element
+        int address = calculateArrayAddress(baseAddress, elementSize, upperBounds, targetIndices);
+
+        // Output the result
+        System.out.println("The memory address of the target element is: " + address);
+
+        scanner.close();
+    }
+
+    // Method to calculate the memory address correctly
+    public static int calculateArrayAddress(int baseAddress, int elementSize, int[] upperBounds, int[] targetIndices) {
+        int address = baseAddress;
+        int multiplier = 1;
+
+        // Compute the correct offset using row-major order
+        for (int i = upperBounds.length - 1; i >= 0; i--) {
+            int index = targetIndices[i];
+            address += (index * elementSize * multiplier);
+            if (i > 0) {
+                multiplier *= upperBounds[i]; // Accumulate product of upper bounds
+            }
+        }
+
+        return address;
+    }
+}
