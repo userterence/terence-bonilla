@@ -1,0 +1,104 @@
+package expressionconverter1;
+
+import java.util.Scanner;
+import java.util.Stack;
+
+/**
+ *
+ * @author M304User
+ */
+public class ExpressionConverter1 {
+
+    /**
+     * @param c
+     
+     * @return 
+     */
+   
+    public static boolean isOperator(char c) {
+        return c == '+' || c == '-' || c == '*' || c == '/';
+    }
+
+    // Method to get precedence of operators
+    public static int precedence(char operator) {
+        return switch (operator) {
+            case '+', '-' -> 1;
+            case '*', '/' -> 2;
+            default -> -1;
+        };
+    }
+
+    // Method to convert infix to postfix
+    public static String infixToPostfix(String infix) {
+        Stack<Character> stack = new Stack<>();
+        StringBuilder postfix = new StringBuilder();
+
+        // Traverse the infix expression
+        for (int i = 0; i < infix.length(); i++) {
+            char c = infix.charAt(i);
+
+            // If the character is a number or operand, append it to output
+            if (Character.isDigit(c)) {
+                postfix.append(c);
+            }
+            // If the character is '(', push it to the stack
+            else if (c == '(') {
+                stack.push(c);
+            }
+            // If the character is ')', pop until '(' is found
+            else if (c == ')') {
+                while (!stack.isEmpty() && stack.peek() != '(') {
+                    postfix.append(stack.pop());
+                }
+                stack.pop(); // Discard '('
+            }
+            // If the character is an operator
+            else if (isOperator(c)) {
+                while (!stack.isEmpty() && precedence(stack.peek()) >= precedence(c)) {
+                    postfix.append(stack.pop());
+                }
+                stack.push(c);
+            }
+        }
+
+        // Pop all remaining operators in the stack
+        while (!stack.isEmpty()) {
+            postfix.append(stack.pop());
+        }
+
+        return postfix.toString();
+    }
+
+    // Method to convert infix to prefix
+    public static String infixToPrefix(String infix) {
+        // Reverse the infix expression
+        infix = new StringBuilder(infix).reverse().toString();
+
+        // Replace '(' with ')' and vice versa
+        infix = infix.replace('(', '#').replace(')', '(').replace('#', ')');
+
+        // Convert the modified infix to postfix
+        String postfix = infixToPostfix(infix);
+
+        // Reverse the postfix to get the prefix
+        return new StringBuilder(postfix).reverse().toString();
+    }
+
+    // Main method to take input and show output
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Accept the infix expression from the user
+        System.out.print("Enter infix expression: ");
+        String infix = scanner.nextLine();
+
+        // Convert infix to prefix and postfix
+        String postfix = infixToPostfix(infix);
+        String prefix = infixToPrefix(infix);
+
+        // Output the results
+        System.out.println("Prefix is: " + prefix);
+        System.out.println("Postfix is: " + postfix);
+    }
+}
+    
