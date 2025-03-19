@@ -1,1 +1,132 @@
 
+package binarysearchtree1;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author M304User
+ */
+public class BinarySearchTree1 {
+    
+    static class Node {
+        int value;
+        Node left, right;
+        
+        Node(int value) {
+            this.value = value;
+            left = right = null;
+        }
+    }
+
+    static class BinarySearchTree {
+        Node root;
+        
+        // Insert a new node into the BST
+        public void insert(int value) {
+            root = insertRec(root, value);
+        }
+        
+        // A recursive helper function for insert
+        private Node insertRec(Node root, int value) {
+            if (root == null) {
+                root = new Node(value);
+                return root;
+            }
+            
+            if (value < root.value) {
+                root.left = insertRec(root.left, value);
+            } else if (value > root.value) {
+                root.right = insertRec(root.right, value);
+            }
+            
+            return root;
+        }
+        
+        // In-order traversal to print the tree
+        public void inorderTraversal() {
+            inorderRec(root);
+            System.out.println();
+        }
+        
+        private void inorderRec(Node root) {
+            if (root != null) {
+                inorderRec(root.left);
+                System.out.print(root.value + " ");
+                inorderRec(root.right);
+            }
+        }
+        
+        // Search for a value in the BST
+        public boolean search(int value) {
+            return searchRec(root, value);
+        }
+        
+        private boolean searchRec(Node root, int value) {
+            if (root == null) {
+                return false;
+            }
+            if (root.value == value) {
+                return true;
+            }
+            return value < root.value ? searchRec(root.left, value) : searchRec(root.right, value);
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Step 1: Input for n and start
+        System.out.print("Enter the value for n: ");
+        int n = scanner.nextInt();
+        
+        System.out.print("Enter the starting value: ");
+        int start = scanner.nextInt();
+        
+        // Step 2: Create the Tree array
+        int[] Tree = new int[n];
+        Tree[0] = start;
+        for (int i = 1; i < n; i++) {
+            Tree[i] = Tree[i - 1] + 1;
+        }
+        
+        // Step 3: Print the Tree array
+        System.out.print("Tree array: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(Tree[i] + " ");
+        }
+        System.out.println();
+        
+        // Step 4: Ask for user choice
+        System.out.print("Enter your choice (an integer): ");
+        int choice = scanner.nextInt();
+        
+        // Step 5: Check if choice is valid
+        boolean isValidChoice = false;
+        for (int i = 0; i < n; i++) {
+            if (Tree[i] == choice) {
+                isValidChoice = true;
+                break;
+            }
+        }
+        
+        if (!isValidChoice) {
+            System.out.println("Invalid");
+        } else {
+            // Step 6: If valid, create the BST and insert elements
+            BinarySearchTree bst = new BinarySearchTree();
+            for (int i = 0; i < n; i++) {
+                bst.insert(Tree[i]);
+            }
+            
+            // Step 7: Set the root to the choice
+            bst.root = new Node(choice);
+            
+            // Step 8: Print the BST in-order traversal
+            System.out.print("BST in-order traversal: ");
+            bst.inorderTraversal();
+        }
+        
+        scanner.close();
+    }
+}
