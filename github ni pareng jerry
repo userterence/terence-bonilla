@@ -1,0 +1,52 @@
+public class DefendAction {
+    private int defensePoints;  // The points this defense action provides
+    private String defenseType; // E.g., "Shield Block", "Dodge"
+
+    // Constructor to initialize the DefendAction
+    public DefendAction(int defensePoints, String defenseType) {
+        this.defensePoints = defensePoints;
+        this.defenseType = defenseType;
+    }
+
+    // Method to perform the defense action
+    public void defend() {
+        System.out.println("Defending using: " + defenseType);
+        System.out.println("Defense points: " + defensePoints);
+    }
+
+    // Getter for defensePoints
+    public int getDefensePoints() {
+        return defensePoints;
+    }
+
+    // Setter for defensePoints
+    public void setDefensePoints(int defensePoints) {
+        this.defensePoints = defensePoints;
+    }
+
+    // Getter for defenseType
+    public String getDefenseType() {
+        return defenseType;
+    }
+
+    // Setter for defenseType
+    public void setDefenseType(String defenseType) {
+        this.defenseType = defenseType;
+    }
+
+    // Optional: Calculate if the defense is successful based on some conditions
+    public boolean isDefended(int incomingDamage) {
+        return incomingDamage <= defensePoints;
+    }
+
+    public static void main(String[] args) {
+        DefendAction defend = new DefendAction(50, "Shield Block");
+        defend.defend();
+
+        if (defend.isDefended(30)) {
+            System.out.println("Defense was successful!");
+        } else {
+            System.out.println("Defense failed.");
+        }
+    }
+}
