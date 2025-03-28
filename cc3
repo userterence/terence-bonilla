@@ -1,0 +1,73 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class LoginForm extends JFrame {
+    private JLabel userLabel, passwordLabel;
+    private JTextField userTextField;
+    private JPasswordField passwordField;
+    private JButton loginButton;
+    private JCheckBox showPassword;
+
+    public LoginForm() {
+        // Set title of JFrame
+        setTitle("Login Page");
+
+        // Set layout manager
+        setLayout(new FlowLayout());
+
+        // Initialize components
+        userLabel = new JLabel("Username:");
+        passwordLabel = new JLabel("Password:");
+        userTextField = new JTextField(20);
+        passwordField = new JPasswordField(20);
+        loginButton = new JButton("Login");
+        showPassword = new JCheckBox("Show Password");
+
+        // Add components to the frame
+        add(userLabel);
+        add(userTextField);
+        add(passwordLabel);
+        add(passwordField);
+        add(showPassword);
+        add(loginButton);
+
+        // Event listener for "Show Password" checkbox
+        showPassword.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (showPassword.isSelected()) {
+                    passwordField.setEchoChar((char) 0);  // Show password
+                } else {
+                    passwordField.setEchoChar('*');  // Hide password
+                }
+            }
+        });
+
+        // Event listener for "Login" button
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = userTextField.getText();
+                char[] password = passwordField.getPassword();
+                String passwordStr = String.valueOf(password);
+
+                // Check if credentials are correct
+                if (Database.checkCredentials(username, passwordStr)) {
+                    JOptionPane.showMessageDialog(null, "Login Successful!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Username or Password.");
+                }
+            }
+        });
+
+        // Default JFrame settings
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 200);
+        setVisible(true);
+        setLocationRelativeTo(null);  // Center the window
+    }
+
+    public static void main(String[] args) {
+        // Create an instance of the LoginForm class
+        new LoginForm();
+    }
+}
