@@ -1,0 +1,155 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package javaapplication32;
+
+/**
+ *
+ * @author M304User
+ */
+import java.util.Scanner;
+
+class AVLTree {
+    static class Node {
+        int value;
+        Node left, right;
+        int height;
+
+        Node(int value) {
+            this.value = value;
+            this.height = 1;
+        }
+    }
+
+    private Node root;
+
+    private int height(Node node) {
+        return node == null ? 0 : node.height;
+    }
+
+    private int balanceFactor(Node node) {
+        return node == null ? 0 : height(node.left) - height(node.right);
+    }
+    private Node rightRotate(Node y) {
+        Node x = y.left;
+        Node T2 = x.right;
+
+        x.right = y;
+        y.left = T2;
+
+        y.height = Math.max(height(y.left), height(y.right)) + 1;
+        x.height = Math.max(height(x.left), height(x.right)) + 1;
+        return x;
+    }
+
+
+    private Node leftRotate(Node x) {
+        Node y = x.right;
+        Node T2 = y.left;
+
+   
+        y.left = x;
+        x.right = T2;
+
+       
+        x.height = Math.max(height(x.left), height(x.right)) + 1;
+        y.height = Math.max(height(y.left), height(y.right)) + 1;
+
+ 
+        return y;
+    }
+
+
+    private Node insert(Node node, int value) {
+        if (node == null) {
+            return new Node(value);
+        }
+
+      
+        if (value < node.value) {
+            node.left = insert(node.left, value);
+        } else if (value > node.value) {
+            node.right = insert(node.right, value);
+        } else {
+           
+            return node;
+        }
+
+        node.height = Math.max(height(node.left), height(node.right)) + 1;
+
+        int balance = balanceFactor(node);
+  
+        if (balance > 1 && value < node.left.value) {
+            return rightRotate(node);
+        }
+
+     
+        if (balance < -1 && value > node.right.value) {
+            return leftRotate(node);
+        }
+       
+        if (balance > 1 && value > node.left.value) {
+            node.left = leftRotate(node.left);
+            return rightRotate(node);
+        }
+
+     
+        if (balance < -1 && value < node.right.value) {
+            node.right = rightRotate(node.right);
+            return leftRotate(node);
+        }
+
+        
+        return node;
+    }
+
+  
+    private void preorder(Node node) {
+        if (node != null) {
+            System.out.print(node.value + " ");
+            preorder(node.left);
+            preorder(node.right);
+        }
+    }
+
+   
+    public void insert(int value) {
+        root = insert(root, value);
+    }
+
+   
+    public void printPreorder() {
+        preorder(root);
+        System.out.println();
+    }
+}
+
+public class AVLTreeDemo {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            AVLTree tree = new AVLTree();
+            
+            OUTER:
+            while (true) {
+                System.out.println("Enter 'insert' to insert a value or 'end' to finish:");
+                String input = scanner.nextLine().trim().toLowerCase();
+                switch (input) {
+                    case "insert" -> {
+                        System.out.println("Enter an integer value to insert:");
+                        int value = scanner.nextInt();
+                        scanner.nextLine();  
+                        tree.insert(value);
+                    }
+                    case "end" -> {
+                        System.out.println("Tree in Preorder:");
+                        tree.printPreorder();
+                        break OUTER;
+                    }
+                    default -> System.out.println("Invalid input. Please enter 'insert' or 'end'.");
+                }
+            }
+        }
+    }
+}
+
