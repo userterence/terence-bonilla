@@ -1,0 +1,36 @@
+classDiagram
+    CombatViewModel {
+        +int health
+        +int attackPower
+        +int defensePower
+        +String status
+        +Combatant player
+        +Combatant enemy
+        +startCombat()
+        +attack()
+        +defend()
+        +checkCombatStatus()
+    }
+    
+    class Combatant {
+        +String name
+        +int health
+        +int attackPower
+        +int defensePower
+        +isAlive()
+        +takeDamage(damage)
+        +attack(target)
+    }
+
+    CombatViewModel "1" --> "1" Combatant : has a
+    CombatViewModel "1" --> "1" Combatant : has a
+    Combatant "1" --> "*" Combatant : attacks
+
+    CombatViewModel : +startCombat()
+    CombatViewModel : +attack()
+    CombatViewModel : +defend()
+    CombatViewModel : +checkCombatStatus()
+
+    Combatant : +isAlive()
+    Combatant : +takeDamage(damage)
+    Combatant : +attack(target)
